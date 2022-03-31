@@ -1,0 +1,25 @@
+{
+  "name": "nodejsstudy",
+  "version": "1.0.0",
+  "description": "node.js study project",
+  "main": "index.js",
+  "proxy": "http://localhost:4000/",
+  "scripts": {
+    "server": "cd server && nodemon server",
+    "client": "cd client && npm start",
+    "start": "concurrently --kill-others-on-fail \"npm run server\" \"npm run client\""
+  },
+  "author": "austin",
+  "license": "MIT",
+  "dependencies": {
+    "@material-ui/core": "^4.12.3",
+    "axios": "^0.26.1",
+    "body-parser": "^1.19.2",
+    "concurrently": "^7.0.0",
+    "cors": "^2.8.5",
+    "express": "^4.17.3",
+    "http-proxy-middleware": "^2.0.4",
+    "mysql2": "^2.3.3",
+    "nodemon": "^2.0.15"
+  }
+}
