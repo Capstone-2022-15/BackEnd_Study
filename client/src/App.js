@@ -1,8 +1,9 @@
 import "./App.css";
 import React, { useState, useEffect } from "react";
 import Customer from "./components/Customer";
+import Customeradd from "./components/CustomerAdd";
 
-const EXTRYPOINT = "http://localhost:4000"
+const EXTRYPOINT = "http://localhost:4000";
 
 function App() {
   const [customers, setCustomers] = useState({
@@ -10,7 +11,6 @@ function App() {
   });
 
   useEffect(() => {
-    
     callApi()
       .then((res) => setCustomers({ customerlist: res }))
       .catch((err) => console.log(err));
@@ -24,6 +24,7 @@ function App() {
 
   return (
     <div>
+      <Customeradd />
       {customers.customerlist.map((e) => {
         return (
           <Customer

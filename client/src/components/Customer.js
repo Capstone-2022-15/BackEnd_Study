@@ -1,4 +1,5 @@
 import React from "react";
+import Customeradd from "./CustomerAdd";
 
 function Customer({ id, name, birthday, gender, job }) {
   return (

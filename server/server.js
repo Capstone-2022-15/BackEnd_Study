@@ -5,6 +5,7 @@ const bodyParser = require("body-parser");
 const app = express();
 const cors = require("cors");
 const port = process.env.PORT || 4000;
+
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(cors());
@@ -31,21 +32,31 @@ const mysql = require("mysql2/promise");
 // };
 // db();
 
+const getConnection = async () => {
+  let connection = await mysql.createConnection({
+    host: conf.host,
+    user: conf.user,
+    password: conf.password,
+    database: conf.database,
+  });
+  return connection;
+};
+
 app.get("/api/customers", async (req, res) => {
   try {
-    let connection = await mysql.createConnection({
-      host: conf.host,
-      user: conf.user,
-      password: conf.password,
-      database: conf.database,
-    });
-
+    const connection = await getConnection();
     let [rows, fields] = await connection.query("SELECT * FROM CUSTOMER");
     res.send(rows);
     console.log(rows);
   } catch (error) {
     console.log(error);
   }
+});
+
+app.post("/api/customers", async (req, res) => {
+  console.log(req.body);
+  const connection = await getConnection();
+  await connection.query("INSERT INTO CUSTOMER SET ?", req.body);
 });
 
 app.listen(port, () => {
