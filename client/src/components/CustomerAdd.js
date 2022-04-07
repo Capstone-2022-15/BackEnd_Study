@@ -65,13 +65,13 @@ function Customeradd({ stateRefresh }) {
 
   return (
     <form onSubmit={handleSubmit}>
-      name : <input type="text" name="name" onChange={handleName} />
+      Name : <input type="text" name="name" onChange={handleName} />
       <br />
-      birthday : <input type="text" name="birthday" onChange={handleBirth} />
+      Birthday : <input type="text" name="birthday" onChange={handleBirth} />
       <br />
-      gender : <input type="text" name="gender" onChange={handleGender} />
+      Gender : <input type="text" name="gender" onChange={handleGender} />
       <br />
-      job : <input type="text" name="job" onChange={handleJob} />
+      Job : <input type="text" name="job" onChange={handleJob} />
       <br />
       <input type="submit" />
     </form>

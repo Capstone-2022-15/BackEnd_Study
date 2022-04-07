@@ -36,12 +36,12 @@ function App() {
   };
 
   return (
-    <div>
+    <div className="App">
       <Customeradd stateRefresh={stateRefresh} />
       <table className="Customer">
         <thead>
           <tr>
-            <th>Id</th>
+            <th>ID</th>
             <th>Name</th>
             <th>Birthday</th>
             <th>Gender</th>
@@ -49,19 +49,19 @@ function App() {
             <th>Setting</th>
           </tr>
         </thead>
-          {customers.customerlist.map((e) => {
-            return (
-              <Customer
-                key={e.id}
-                id={e.id}
-                name={e.name}
-                birthday={e.birthday}
-                gender={e.gender}
-                job={e.job}
-                stateRefresh={stateRefresh}
-              />
-            );
-          })}
+        {customers.customerlist.map((e) => {
+          return (
+            <Customer
+              key={e.id}
+              id={e.id}
+              name={e.name}
+              birthday={e.birthday}
+              gender={e.gender}
+              job={e.job}
+              stateRefresh={stateRefresh}
+            />
+          );
+        })}
       </table>
     </div>
   );
