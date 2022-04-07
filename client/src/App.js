@@ -22,9 +22,18 @@ function App() {
     return body;
   };
 
+  const stateRefresh = async () => {
+    setCustomers({
+      customerlist: [],
+    });
+    await callApi()
+      .then((res) => setCustomers({ customerlist: res }))
+      .catch((err) => console.log(err));
+  }
+
   return (
     <div>
-      <Customeradd />
+      <Customeradd stateRefresh={stateRefresh} />
       {customers.customerlist.map((e) => {
         return (
           <Customer
@@ -34,6 +43,7 @@ function App() {
             birthday={e.birthday}
             gender={e.gender}
             job={e.job}
+            stateRefresh={stateRefresh}
           />
         );
       })}

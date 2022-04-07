@@ -1,32 +1,45 @@
 import React from "react";
-import Customeradd from "./CustomerAdd";
+import CustomerDel from "./CustomerDel";
 
-function Customer({ id, name, birthday, gender, job }) {
+function Customer({ id, name, birthday, gender, job, stateRefresh }) {
   return (
-    <div className="Customer">
-      <CustomerProfile id={id} name={name} />
-      <CustomerInfo birthday={birthday} gender={gender} job={job} />
-    </div>
+    <table className="Customer">
+      <thead>
+        <tr>
+          <th>Id</th>
+          <th>Name</th>
+          <th>Birthday</th>
+          <th>Gender</th>
+          <th>Job</th>
+          <th>Setting</th>
+        </tr>
+      </thead>
+      <tbody>
+        <CustomerProfile
+          id={id}
+          name={name}
+          birthday={birthday}
+          gender={gender}
+          job={job}
+          stateRefresh={stateRefresh}
+        />
+      </tbody>
+    </table>
   );
 }
 
-function CustomerProfile({ id, name }) {
+function CustomerProfile({ id, name, birthday, gender, job, stateRefresh }) {
   return (
-    <div>
-      <h2>
-        {name}({id})
-      </h2>
-    </div>
-  );
-}
-
-function CustomerInfo({ birthday, gender, job }) {
-  return (
-    <div>
-      <p>{birthday}</p>
-      <p>{gender}</p>
-      <p>{job}</p>
-    </div>
+    <tr>
+      <td>{id}</td>
+      <td>{name}</td>
+      <td>{birthday}</td>
+      <td>{gender}</td>
+      <td>{job}</td>
+      <td>
+        <CustomerDel stateRefresh={stateRefresh} id={id} />
+      </td>
+    </tr>
   );
 }
 

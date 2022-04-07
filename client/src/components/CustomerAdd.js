@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 const axios = require("axios");
 
-function Customeradd() {
+function Customeradd({ stateRefresh }) {
   const [name, setname] = useState("");
   const [birthday, setbirthday] = useState("");
   const [gender, setgender] = useState("");
@@ -26,7 +26,10 @@ function Customeradd() {
       if (Number(inputData.birthday)) {
         axios
           .post("http://localhost:4000/api/customers", inputData)
-          .then(() => console.log(inputData))
+          .then(() => {
+            console.log(inputData);
+            stateRefresh();
+          })
           .catch((error) => {
             console.error(error);
           });

@@ -45,7 +45,9 @@ const getConnection = async () => {
 app.get("/api/customers", async (req, res) => {
   try {
     const connection = await getConnection();
-    let [rows, fields] = await connection.query("SELECT * FROM CUSTOMER");
+    let [rows, fields] = await connection.query(
+      "SELECT * FROM CUSTOMER WHERE isDeleted = 0"
+    );
     res.send(rows);
     console.log(rows);
   } catch (error) {
@@ -56,7 +58,23 @@ app.get("/api/customers", async (req, res) => {
 app.post("/api/customers", async (req, res) => {
   console.log(req.body);
   const connection = await getConnection();
-  await connection.query("INSERT INTO CUSTOMER SET ?", req.body);
+  let sql = "INSERT INTO CUSTOMER VALUES (null,?,?,?,?,now(),0)";
+  let name = req.body.name;
+  let birthday = req.body.birthday;
+  let gender = req.body.gender;
+  let job = req.body.job;
+  let params = [name, birthday, gender, job];
+  await connection.query(sql, params, (error, rows, fields) => {
+    res.send(rows);
+  });
+});
+
+app.delete("/api/customers/:id", async (req, res) => {
+  const connection = await getConnection();
+  console.log(req.params.id);
+  let sql = "UPDATE CUSTOMER SET isDeleted = 1 WHERE id = ?";
+  let params = [req.params.id];
+  connection.query(sql, params);
 });
 
 app.listen(port, () => {
