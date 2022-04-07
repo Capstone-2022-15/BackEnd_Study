@@ -32,3 +32,9 @@ input {
   margin-top: 5px;
   border: 0;
 }
+button {
+  width: 100%;
+  border: 0;
+  font-weight: bold;
+  color: red;
+}

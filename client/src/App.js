@@ -24,7 +24,7 @@ function App() {
     const body = await response.json();
     return body;
   };
-  
+
   //왜 동작 안하는지 모르겠지만 스테이트를 변경함으로써 리스트 새로고침
   const stateRefresh = async () => {
     setCustomers({
@@ -33,24 +33,36 @@ function App() {
     await callApi()
       .then((res) => setCustomers({ customerlist: res }))
       .catch((err) => console.log(err));
-  }
+  };
 
   return (
     <div>
       <Customeradd stateRefresh={stateRefresh} />
-      {customers.customerlist.map((e) => {
-        return (
-          <Customer
-            key={e.id}
-            id={e.id}
-            name={e.name}
-            birthday={e.birthday}
-            gender={e.gender}
-            job={e.job}
-            stateRefresh={stateRefresh}
-          />
-        );
-      })}
+      <table className="Customer">
+        <thead>
+          <tr>
+            <th>Id</th>
+            <th>Name</th>
+            <th>Birthday</th>
+            <th>Gender</th>
+            <th>Job</th>
+            <th>Setting</th>
+          </tr>
+        </thead>
+          {customers.customerlist.map((e) => {
+            return (
+              <Customer
+                key={e.id}
+                id={e.id}
+                name={e.name}
+                birthday={e.birthday}
+                gender={e.gender}
+                job={e.job}
+                stateRefresh={stateRefresh}
+              />
+            );
+          })}
+      </table>
     </div>
   );
 }
